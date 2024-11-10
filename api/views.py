@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views import View
 # Create your views here.
-from api.utils import fetch_bitcoin_price,llama_request,rate_limit
+from api.utils import fetch_bitcoin_price,llama_request,rate_limit, get_cryto_type
 
 from rest_framework.views import APIView
 
@@ -23,17 +23,17 @@ class ChatView(APIView):
         
         # Determine response based on keywords
         
-        if "bitcoin price" in user_message :
+        if "fetch the current prize of" in user_message :
             # Fetch Bitcoin price and return
             #checking the rate limit
             is_allowed, rate_limit_response = rate_limit(request)
             if not is_allowed:
                 return Response({"error":rate_limit_response})
-            price = fetch_bitcoin_price()
+            price = fetch_bitcoin_price(get_cryto_type(user_message))
             if "Error" in price:
-                response = "Error fetching Bitcoin price"
+                response = "Error fetching  price"
             else:
-                response = f"The current price of Bitcoin is ${price}"
+                response = f"The current price of {get_cryto_type(user_message)} is ${price}"
                 conversation_history.append({"role": "user", "content": response})
                 
                 

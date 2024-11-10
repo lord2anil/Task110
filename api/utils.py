@@ -7,15 +7,15 @@ from django.http import JsonResponse
 from datetime import timedelta
 
 TOGETHER_AI_API_URL = "https://api.together.xyz/llama"  
-CRYPTO_API_URL = "https://api.coincap.io/v2/assets/bitcoin"     
+CRYPTO_API_URL = "https://api.coincap.io/v2/assets/"     
 
 client = Together(api_key="your_api_key")
 
 
-def fetch_bitcoin_price():
+def fetch_bitcoin_price(crypto_type):
     
     # Storing the bitcoin_price in  Cache
-    cache_key = "bitcoin_price"
+    cache_key = crypto_type
     
     
     cache_timeout = 10  
@@ -24,16 +24,16 @@ def fetch_bitcoin_price():
         return cache.get(cache_key)
     
     try:
-        response = requests.get(f"{CRYPTO_API_URL}")
+        response = requests.get(f"{CRYPTO_API_URL}"+crypto_type)
         response.raise_for_status()
         price = response.json().get("data", {}).get("priceUsd")
         
-        # Storing the bitcoin_price in cache
+        # Storing the price in cache
         
         cache.set(cache_key, price, timeout=cache_timeout)
         return response.json().get("data", {}).get("priceUsd")
     except requests.RequestException as e:
-        return f"Error fetching Bitcoin price: {str(e)}"
+        return f"Error fetching  price: {str(e)}"
 
 
 def llama_request(conversation_history):
@@ -63,6 +63,20 @@ def llama_request(conversation_history):
         return f"Error with LLaMA request: {str(e)}"
 
 
+def get_cryto_type(data):
+    data = data.lower()
+    words= data.split()
+    
+    ## Assuming the promt will be in the format "fetch the current prize of ..."
+    ## "fetch the current prize of ..."
+    return words[-1]
+    
+        
+        
+    
+    
+    
+    
 
 
 # Only 3 request  per min

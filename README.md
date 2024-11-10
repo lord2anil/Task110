@@ -37,7 +37,7 @@ This is a Django project that includes an API for fetching Bitcoin prices and in
 
 ```
 {
-    "message": "What is the current Bitcoin price?"
+    "message": "fetch the current prize of bitcoin"
 }
 
 
@@ -46,7 +46,7 @@ This is a Django project that includes an API for fetching Bitcoin prices and in
 }
 ```
 
-#### Note-:   For getting the Bitcoin price, i assuming that all the sentance that are contain "Bitcoin price"(case insensitive)  keyword are trying  to get bitcoin price and other are normal conversation with agent
+#### Note-:   For getting the crypto price, the promt should be "fetch the current prize of {crypto Currency Name}"  (case insensitive)   and  other are normal conversation with agent
 
 #### Rate Limiting
 The API has a rate limit of 3 requests per minute per IP address. If the limit is exceeded, the following response is returned:
@@ -56,7 +56,7 @@ The API has a rate limit of 3 requests per minute per IP address. If the limit i
     "error": "Rate limit exceeded. Try again later."
 }
 ```
-#### cache_timeout = 10s  for bitcoin Api 
+#### cache_timeout = 10s   for storing the response for 10 seconds in cache 
 
 
 ### Testing video 
