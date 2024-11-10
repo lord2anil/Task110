@@ -2,13 +2,12 @@
 
 This is a Django project that includes an API for fetching Bitcoin prices and interacting with a LLaMA model.
 
-## Project Structure
-
 
 ## Setup
 
 1. **Clone the repository:**
-   
+    ```sh
+    git clone https://github.com/lord2anil/Task110.git
 
 2. **Install dependencies:**
     ```sh
@@ -45,7 +44,12 @@ This is a Django project that includes an API for fetching Bitcoin prices and in
 
 Rate Limiting
 The API has a rate limit of 3 requests per minute per IP address. If the limit is exceeded, the following response is returned:
-
+```
 {
     "error": "Rate limit exceeded. Try again later."
 }
+
+### Testing video 
+
+[Demo Video](https://drive.google.com/file/d/1Yb104OSCp671tJ_8ObS28e0l-Hh0qNZY/view?usp=sharing)
+
