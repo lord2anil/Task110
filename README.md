@@ -25,6 +25,7 @@ This is a Django project that includes an API for fetching Bitcoin prices and in
     ```
 
 ## API Endpoints
+### Please Include the Your api key in [utils.py](api/utils.py)
 
 ### Chat Endpoint
 
@@ -33,21 +34,30 @@ This is a Django project that includes an API for fetching Bitcoin prices and in
 - **Description:** Interacts with the LLaMA model and fetches Bitcoin prices based on user messages.
 
 #### Example Request
-```json
+
+```
 {
     "message": "What is the current Bitcoin price?"
 }
 
+
 {
     "response": "The current price of Bitcoin is $50000"
 }
+```
 
-Rate Limiting
+#### Note-:   For getting the Bitcoin price, i assuming that all the sentance that are contain "Bitcoin price"(case insensitive)  keyword are trying  to get bitcoin price and other are normal conversation with agent
+
+#### Rate Limiting
 The API has a rate limit of 3 requests per minute per IP address. If the limit is exceeded, the following response is returned:
+
 ```
 {
     "error": "Rate limit exceeded. Try again later."
 }
+```
+#### cache_timeout = 10s  for bitcoin Api 
+
 
 ### Testing video 
 
